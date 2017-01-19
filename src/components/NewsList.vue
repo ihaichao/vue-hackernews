@@ -1,15 +1,13 @@
 <template>
   <div class="news-view" :class="{ loading: !items.length }">
-    <!-- item list -->
     <item
-      v-for="(item, index) in items"
+      v-for="item in items"
       :item="item"
-      :index="index + 1">
+      :index="item.index">
     </item>
-    <!-- navigation -->
-    <div class="nav" v-show="items.length > 0">
-      <a v-if="page > 1" :href="'#/news/' + (page - 1)">&lt; prev</a>
-      <a v-if="page < 4" :href="'#/news/' + (page + 1)">more...</a>
+    <div class="pagination" v-show="items.length > 0">
+      <router-link v-if="page > 1" :to="path + (page - 1)">&lt; prev</router-link>
+      <router-link v-if="hasMore" :to="path + (page + 1)">more...</router-link>
     </div>
   </div>
 </template>
@@ -28,15 +26,55 @@ export default {
 
   data () {
     return {
-      page: 1,
       items: []
     }
   },
 
   mounted () {
-    this.$store.dispatch('FETCH_LIST_DATA', 'top').then(() => {
-      this.items = this.$store.state.items
-    })
+    this.fetchItems()
+  },
+
+  watch: {
+    '$route': function () {
+      this.fetchItems()
+    }
+  },
+
+  methods: {
+    fetchItems () {
+      this.$Progress.start()
+      this.$store.dispatch('FETCH_LIST_DATA', {
+        type: this.type,
+        page: this.page
+      }).then(() => {
+        this.$Progress.finish()
+        this.items = this.$store.state.items
+        this.items.forEach((item, index) => {
+          this.$set(item, 'index', (this.page - 1) * this.$store.state.itemsPerPage + index + 1)
+        })
+      }, () => {
+        this.$Progress.fail()
+      })
+    }
+  },
+
+  computed: {
+    page () {
+      return Number(this.$store.state.route.params.page) || 1
+    },
+    type () {
+      return this.$store.state.route.name
+    },
+    path () {
+      return this.$store.state.route.name === 'top' ? '/' : `/${this.$store.state.route.name}/`
+    },
+    maxPage () {
+      const { itemsPerPage, lists } = this.$store.state
+      return Math.ceil(lists[this.type].length / itemsPerPage)
+    },
+    hasMore () {
+      return this.page < this.maxPage
+    }
   }
 }
 </script>
@@ -48,10 +86,10 @@ export default {
   &.loading:before
     content "Loading..."
     position absolute
-    top 16px
+    bottom -10px
     left 50%
     transform translateX(-50%)
-  .nav
+  .pagination
     padding 10px 10px 10px 40px
     margin-top 10px
     border-top 2px solid #f60

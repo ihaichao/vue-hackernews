@@ -2,12 +2,11 @@
 	<div class="news-header">
     <div class="logo"></div>
     <ul class="nav">
-    	<a class="title" href="/">Hacker News</a>
-      <a class="tab" href="/newest">new</a>
-      <a class="tab" href="/newcomments">comments</a>
-      <a class="tab" href="/show">show</a>
-      <a class="tab" href="/ask">ask</a>
-      <a class="tab" href="/jobs">jobs</a>
+    	<router-link class="title" :to="{ name: 'top' }">Hacker News</router-link>
+      <router-link class="tab" :to="{ name: 'new' }">new</router-link>
+      <router-link class="tab" :to="{ name: 'show' }">show</router-link>
+      <router-link class="tab" :to="{ name: 'ask' }">ask</router-link>
+      <router-link class="tab" :to="{ name: 'job' }">jobs</router-link>
     </ul>
     <span class="project-info">Built with Vue.js | <a class="source" href="https://github.com/ihaichao/vue2-hackernews.git">Source</a></span>
 	</div>
@@ -36,9 +35,12 @@
       &::after
         content '|'
         color #000
+        margin-left 3px
       &:last-child
         &::after
           content ''
+      &.router-link-active
+        color #fff
   .project-info
     color #fff
     .source

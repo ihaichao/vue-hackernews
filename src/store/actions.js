@@ -1,14 +1,25 @@
 import { fetchIdsByType, fetchItems } from './api'
 
-export const FETCH_LIST_DATA = ({ commit, dispatch, state }, type) => {
-	commit('SET_ACTIVE_TYPE', type)
-	return fetchIdsByType(type).then(ids => dispatch('FETCH_ITEMS', {ids: ids}))
+const FETCH_LIST_DATA = ({ commit, dispatch, state }, { type, page }) => {
+	return fetchIdsByType(type)
+		.then(ids => commit('SET_LIST', { type, ids }))
+		.then(() => commit('SET_ACTIVE_TYPE', { type }))
+		.then(() => dispatch('FETCH_ITEMS_BY_PAGE', {ids: state.lists[type], page: page}))
 }
 
-export const FETCH_ITEMS = ({ commit }, { ids }) => {
+const FETCH_ITEMS_BY_PAGE = ({ commit, state }, { ids, page }) => {
+	const itemsPerPage = state.itemsPerPage
+	const start = (page - 1) * itemsPerPage
+	const end = page * itemsPerPage
+	ids = ids.slice(start, end)
 	if (ids.length) {
-	  return fetchItems(ids).then(items => commit('SET_ITEMS', { items }))
+		return fetchItems(ids).then(items => commit('SET_ITEMS', { items }))
 	} else {
-	  return Promise.resolve()
+		return Promise.resolve()
 	}
+}
+
+export {
+	FETCH_LIST_DATA,
+	FETCH_ITEMS_BY_PAGE
 }

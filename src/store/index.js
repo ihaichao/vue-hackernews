@@ -7,14 +7,14 @@ Vue.use(Vuex)
 
 const state = {
 	activeType: null,
-	itemsPerPage: 20,
-	items: {/* [id: number]: Item */},
+	itemsPerPage: 30,
+	items: [],
 	lists: {
+		top: [],
 	  new: [],
-	  comments: [],
 	  show: [],
 	  ask: [],
-	  jobs: []
+	  job: []
 	}
 }
 

@@ -2,6 +2,7 @@
   <div id="app">
   	<NewsHeader></NewsHeader>
     <router-view class="view"></router-view>
+    <vue-progress-bar></vue-progress-bar>
   </div>
 </template>
 
