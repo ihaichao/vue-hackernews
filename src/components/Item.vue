@@ -10,11 +10,11 @@
     <p class="subtext">
       <span v-show="showInfo">
         {{item.score}} points by
-        <a :href="'//news.ycombinator.com/user?id=' + item.by">{{item.by}}</a>
+        <a :href="'//news.ycombinator.com/user?id=' + item.by" target="_blank">{{item.by}}</a>
       </span>
       {{item.time | fromNow}} ago
       <span class="comments-link" v-show="showInfo">
-        | <a :href="'//news.ycombinator.com/item?id=' + item.id">{{item.descendants | pluralize('comment')}}</a>
+        | <a :href="'//news.ycombinator.com/item?id=' + item.id" target="_blank">{{item.descendants | pluralize('comment')}}</a>
       </span>
     </p>
   </div>
