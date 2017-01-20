@@ -6,7 +6,6 @@ Vue.use(Router)
 import NewsList from '../components/NewsList.vue'
 
 export default new Router({
-	mode: 'history',
 	scrollBehavior: () => ({ y: 0 }),
 	routes: [
 		{ path: '/:page(\\d+)?', name: 'top', component: NewsList },
