@@ -1,4 +1,7 @@
 # vue2-hackernews
+
+[Live demo](https://ihaichao.github.io/vue2-hackernews/#/)
+
 HackerNews clone built with Vue 2.0 + vue-router + vuex.
 
 ## Build Setup
