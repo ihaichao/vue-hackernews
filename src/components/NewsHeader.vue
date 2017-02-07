@@ -46,3 +46,11 @@
     .source
       color #fff
 </style>
+
+<script lang="ts">
+import Vue = require('vue')
+import Component from 'vue-class-component'
+
+@Component
+export default class NewsHeader extends Vue {}
+</script>

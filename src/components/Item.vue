@@ -20,26 +20,30 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue = require('vue')
+import Component from 'vue-class-component'
+import { Prop } from 'vue-property-decorator'
 
-  name: 'Item',
+@Component
+export default class Item extends Vue {
 
-  props: {
-    item: Object,
-    index: Number
-  },
+  @Prop
+  item
 
-  computed: {
-    href () {
-      return this.item.url || ('#/item/' + this.item.id)
-    },
-    showInfo () {
-      return this.item.type === 'story' || this.item.type === 'poll'
-    },
-    showDomain () {
-      return this.item.type === 'story'
-    }
+  @Prop
+  index: Number
+
+  get href (): string {
+    return this.item.url || ('#/item/' + this.item.id)
+  }
+
+  get showInfo (): boolean {
+    return this.item.type === 'story' || this.item.type === 'poll'
+  }
+  
+  get showDomain (): boolean {
+    return this.item.type === 'story'
   }
 }
 </script>

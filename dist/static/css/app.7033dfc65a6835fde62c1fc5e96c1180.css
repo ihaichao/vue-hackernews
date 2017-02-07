@@ -1,0 +1,136 @@
+
+.__cov-progress {
+  position: fixed;
+  opacity: 1;
+  z-index: 999999;
+}
+
+html,
+body {
+  font-family: Verdana;
+  font-size: 13px;
+  height: 100%;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+#app {
+  width: 85%;
+  min-height: 80px;
+  margin: 0 auto;
+  position: relative;
+  background-color: #f6f6ef;
+}
+.view {
+  position: absolute;
+  background-color: #f6f6ef;
+  width: 100%;
+  transition: opacity 0.2s ease;
+  box-sizing: border-box;
+  padding: 8px 20px;
+}
+.view.v-enter,
+.view.v-leave {
+  opacity: 0;
+}
+.news-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 2px;
+  background-color: #f60;
+}
+.news-header .logo {
+  width: 18px;
+  height: 18px;
+  background-image: url(data:image/gif;base64,R0lGODlhEgASAKIAAP/jyvihV/aKLfmxc/////9mAAAAAAAAACH5BAAAAAAALAAAAAASABIAAAMpWLrc/jDKOQkRy8pBhuKeRAAKQFBBxwVUYY5twXVxodV3nLd77f9ASQIAOw==);
+  border: 1px solid #fff;
+  margin-right: 4px;
+}
+.news-header .nav {
+  -ms-flex-positive: 1;
+      flex-grow: 1;
+}
+.news-header .nav .title {
+  font-weight: bold;
+  margin-right: 10px;
+}
+.news-header .nav .tab::after {
+  content: '|';
+  color: #000;
+  margin-left: 3px;
+}
+.news-header .nav .tab:last-child::after {
+  content: '';
+}
+.news-header .nav .tab.router-link-active {
+  color: #fff;
+}
+.news-header .project-info {
+  color: #fff;
+}
+.news-header .project-info .source {
+  color: #fff;
+}
+.news-view {
+  padding-left: 5px;
+  padding-right: 15px;
+}
+.news-view.loading:before {
+  content: "Loading...";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.news-view .pagination {
+  padding: 10px 10px 10px 40px;
+  margin-top: 10px;
+  border-top: 2px solid #f60;
+}
+.news-view .pagination a {
+  margin-right: 10px;
+}
+.news-view .pagination a:hover {
+  text-decoration: underline;
+}
+.item {
+  padding: 2px 0 2px 40px;
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+.item p {
+  margin: 2px 0;
+}
+.item .title:visited {
+  color: #828282;
+}
+.item .index {
+  color: #828282;
+  position: absolute;
+  width: 30px;
+  text-align: right;
+  left: 0;
+  top: 4px;
+}
+.item .domain,
+.item .subtext {
+  font-size: 11px;
+  color: #828282;
+}
+.item .domain a,
+.item .subtext a {
+  color: #828282;
+}
+.item .subtext a:hover {
+  text-decoration: underline;
+}
+/*# sourceMappingURL=app.7033dfc65a6835fde62c1fc5e96c1180.css.map*/

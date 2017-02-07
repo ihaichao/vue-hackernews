@@ -12,69 +12,64 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue = require('vue')
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
 import store from '../store'
 import Item from './Item.vue'
 
-export default {
+@Component({
+  components: { Item }
+})
+export default class NewsList extends Vue {
 
-  name: 'NewsView',
+  items: Object[] = []
 
-  components: {
-    Item
-  },
-
-  data () {
-    return {
-      items: []
-    }
-  },
-
-  mounted () {
+  mounted (): void {
     this.fetchItems()
-  },
+  }
 
-  watch: {
-    '$route': function () {
-      this.fetchItems()
-    }
-  },
-
-  methods: {
-    fetchItems () {
-      this.$Progress.start()
-      this.$store.dispatch('FETCH_LIST_DATA', {
-        type: this.type,
-        page: this.page
-      }).then(() => {
-        this.$Progress.finish()
-        this.items = this.$store.state.items
-        this.items.forEach((item, index) => {
-          this.$set(item, 'index', (this.page - 1) * this.$store.state.itemsPerPage + index + 1)
-        })
-      }, () => {
-        this.$Progress.fail()
+  @Watch('$route') 
+  onRouteChanged (): void {
+    this.fetchItems()
+  }
+  
+  fetchItems (): void {
+    // this.$Progress.start()
+    this.$store.dispatch('FETCH_LIST_DATA', {
+      type: this.type,
+      page: this.page
+    }).then(() => {
+      // this.$Progress.finish()
+      this.items = this.$store.state.items
+      this.items.forEach((item, index) => {
+        this.$set(item, 'index', (this.page - 1) * this.$store.state.itemsPerPage + index + 1)
       })
-    }
-  },
+    }, () => {
+      // this.$Progress.fail()
+    })
+  }
 
-  computed: {
-    page () {
-      return Number(this.$store.state.route.params.page) || 1
-    },
-    type () {
-      return this.$store.state.route.name
-    },
-    path () {
-      return this.$store.state.route.name === 'top' ? '/' : `/${this.$store.state.route.name}/`
-    },
-    maxPage () {
-      const { itemsPerPage, lists } = this.$store.state
-      return Math.ceil(lists[this.type].length / itemsPerPage)
-    },
-    hasMore () {
-      return this.page < this.maxPage
-    }
+  get page (): number {
+    return Number(this.$store.state.route.params.page) || 1
+  }
+  
+  get type (): string {
+    return this.$store.state.route.name
+  }
+
+  get path (): string {
+    return this.$store.state.route.name === 'top' ? '/' : `/${this.$store.state.route.name}/`
+  }
+
+  get maxPage (): number {
+    const { itemsPerPage, lists } = this.$store.state
+    return Math.ceil(lists[this.type].length / itemsPerPage)
+  }
+
+  get hasMore (): boolean {
+    return this.page < this.maxPage
   }
 }
 </script>

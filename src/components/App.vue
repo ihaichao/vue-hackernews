@@ -2,24 +2,22 @@
   <div id="app">
   	<NewsHeader></NewsHeader>
     <router-view class="view"></router-view>
-    <vue-progress-bar></vue-progress-bar>
+    <!--<vue-progress-bar></vue-progress-bar>-->
   </div>
 </template>
 
-<script>
-import NewsHeader from './NewsHeader'
+<script lang="ts">
+import Vue = require('vue')
+import Component from 'vue-class-component'
+import NewsHeader from './NewsHeader.vue'
 
-export default {
-  name: 'app',
-  components: {
-    NewsHeader
-  }
-}
+@Component({components: {NewsHeader}})
+export default class App extends Vue {}
 </script>
 
 <style lang="stylus">
 html, body
-  font-family Verdana
+  font-family Verdana 
   font-size 13px
   height 100%
   
