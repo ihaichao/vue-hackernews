@@ -32,9 +32,9 @@ Vue.filter('domain', domain)
 Vue.filter('pluralize', pluralize)
 
 const app = new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App },
   router,
-  store
+  store,
+  ...App
 })
+
+export { app, router, store }

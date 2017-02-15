@@ -1,8 +1,5 @@
-const urlParser = document.createElement('a')
-
 export function domain (url) {
-  urlParser.href = url
-  return urlParser.hostname
+  return url.match(/\/\/(.*?)\//)[1]
 }
 
 export function fromNow (time) {
