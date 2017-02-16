@@ -9,6 +9,11 @@ module.exports = Object.assign({}, base, {
     filename: 'server-bundle.js',
     libraryTarget: 'commonjs2'
   }),
+  resolve: {
+    alias: Object.assign({}, base.resolve.alias, {
+      'create-api': './create-api-server.js'
+    })
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),

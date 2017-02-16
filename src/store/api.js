@@ -1,5 +1,6 @@
 import Firebase from 'firebase/app'
 import Database from 'firebase/database'
+import api from 'create-api'
 
 const config = {
   databaseURL: 'https://hacker-news.firebaseio.com'
@@ -7,7 +8,7 @@ const config = {
 
 Firebase.initializeApp(config)
 const version = '/v0'
-const api = Firebase.database().ref(version)
+// const api = Firebase.database().ref(version)
 const itemsCache = Object.create(null)
 // const storiesPerPage = 30
 

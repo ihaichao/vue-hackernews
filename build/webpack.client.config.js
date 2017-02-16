@@ -4,6 +4,11 @@ const vueConfig = require('./vue-loader.config')
 
 
 const config = Object.assign({}, base, {
+  resolve: {
+    alias: Object.assign({}, base.resolve.alias, {
+      'create-api': './create-api-client.js'
+    })
+  },
   plugins: (base.plugins || []).concat([
     // strip comments in Vue code
     new webpack.DefinePlugin({

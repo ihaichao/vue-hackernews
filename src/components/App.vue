@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import NewsHeader from './NewsHeader'
+import NewsHeader from './NewsHeader.vue'
 
 export default {
   name: 'app',

@@ -1,6 +1,7 @@
 import { fetchIdsByType, fetchItems } from './api'
 
 const FETCH_LIST_DATA = ({ commit, dispatch, state }, { type, page }) => {
+	console.log(2)
 	return fetchIdsByType(type)
 		.then(ids => commit('SET_LIST', { type, ids }))
 		.then(() => commit('SET_ACTIVE_TYPE', { type }))
@@ -12,6 +13,7 @@ const FETCH_ITEMS_BY_PAGE = ({ commit, state }, { ids, page }) => {
 	const start = (page - 1) * itemsPerPage
 	const end = page * itemsPerPage
 	ids = ids.slice(start, end)
+	console.log(ids.length)
 	if (ids.length) {
 		return fetchItems(ids).then(items => commit('SET_ITEMS', { items }))
 	} else {
