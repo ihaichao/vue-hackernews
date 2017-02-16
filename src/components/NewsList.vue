@@ -16,6 +16,8 @@
 import store from '../store'
 import Item from './Item.vue'
 
+let isInitialRender = true
+
 export default {
 
   name: 'NewsView',
@@ -25,13 +27,18 @@ export default {
   },
 
   data () {
-    return {
-      items: []
+    const data = {
+      items: isInitialRender ? this.$store.getters.activeItems : []
     }
+    isInitialRender = false
+    return data
   },
 
-  mounted () {
-    this.fetchItems()
+  created () {
+    // if (this.$root._isMounted) {
+    //   console.log(2)
+    //   this.fetchItems()
+    // }
   },
 
   watch: {
