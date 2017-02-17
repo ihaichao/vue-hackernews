@@ -1,14 +1,13 @@
 <template>
   <div class="news-view" :class="{ loading: !items.length }">
-    <!--<item
+    <item
       v-for="item in items"
       :item="item"
       :index="item.index">
-    </item>-->
+    </item>
     <div class="pagination" v-show="items.length > 0">
-      <h1 v-text="items[0].id"></h1>
-      <!--<router-link v-if="page > 1" :to="path + (page - 1)">&lt; prev</router-link>
-      <router-link v-if="hasMore" :to="path + (page + 1)">more...</router-link>-->
+      <router-link v-if="page > 1" :to="path + (page - 1)">&lt; prev</router-link>
+      <router-link v-if="hasMore" :to="path + (page + 1)">more...</router-link>
     </div>
   </div>
 </template>
@@ -36,10 +35,9 @@ export default {
   },
 
   created () {
-    // if (this.$root._isMounted) {
-    //   console.log(2)
-    //   this.fetchItems()
-    // }
+    if (this.$root._isMounted) {
+      this.fetchItems()
+    }
   },
 
   watch: {
@@ -56,10 +54,7 @@ export default {
         page: this.page
       }).then(() => {
         this.$Progress.finish()
-        this.items = this.$store.state.items
-        this.items.forEach((item, index) => {
-          this.$set(item, 'index', (this.page - 1) * this.$store.state.itemsPerPage + index + 1)
-        })
+        this.items = this.$store.getters.activeItems
       }, () => {
         this.$Progress.fail()
       })
