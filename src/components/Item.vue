@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <span class="index">{{index}}.</span>
+    <!--<span class="index">{{index}}.</span>
     <p>
       <a class="title" :href="href" target="_blank">{{item.title}}</a>
       <span class="domain" v-show="showDomain">
@@ -16,7 +16,7 @@
       <span class="comments-link" v-show="showInfo">
         | <a :href="'//news.ycombinator.com/item?id=' + item.id" target="_blank">{{item.descendants | pluralize('comment')}}</a>
       </span>
-    </p>
+    </p>-->
   </div>
 </template>
 
