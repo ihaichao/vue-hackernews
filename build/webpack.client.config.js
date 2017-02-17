@@ -1,9 +1,15 @@
 const base = require('./webpack.base.config')
 const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
+const HTMLPlugin = require('html-webpack-plugin')
 
 
 const config = Object.assign({}, base, {
+  resolve: {
+    alias: Object.assign({}, base.resolve.alias, {
+      'create-api': './create-api-client.js'
+    })
+  },
   plugins: (base.plugins || []).concat([
     // strip comments in Vue code
     new webpack.DefinePlugin({
@@ -13,7 +19,11 @@ const config = Object.assign({}, base, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'client-vendor-bundle.js'
-    })
+    }),
+    // generate output HTML
+    // new HTMLPlugin({
+    //   template: './index.html'
+    // })
   ])
 })
 

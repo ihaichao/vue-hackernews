@@ -6,7 +6,7 @@ export default context => {
   // call prefetch hooks on components matched by the route
   const s = Date.now()
   return Promise.all(router.getMatchedComponents().map(component => {
-    if (component.preFech) {
+    if (component.preFetch) {
       return component.preFetch(store)
     }
   })).then(() => {

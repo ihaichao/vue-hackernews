@@ -1,15 +1,7 @@
-import Firebase from 'firebase/app'
-import Database from 'firebase/database'
+// this is aliased in webpack config based on server/client build
+import api from 'create-api'
 
-const config = {
-  databaseURL: 'https://hacker-news.firebaseio.com'
-}
-
-Firebase.initializeApp(config)
-const version = '/v0'
-const api = Firebase.database().ref(version)
 const itemsCache = Object.create(null)
-// const storiesPerPage = 30
 
 /**
  * 根据 id 获得 item

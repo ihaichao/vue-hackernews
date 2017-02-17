@@ -6,7 +6,7 @@ module.exports = {
   devtool: '#source-map',
   entry: {
     app: './src/client-entry.js',
-    vendor: ['vue', 'vue-router', 'vuex', 'vuex-router-sync']
+    vendor: ['vue', 'vue-router', 'vuex', 'vuex-router-sync', 'firebase/app', 'firebase/database']
   },
   resolve: {
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
