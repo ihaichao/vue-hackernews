@@ -54,29 +54,30 @@ app.get('*', (req, res) => {
     return res.end('waiting for compilation... refresh in a moment.')
   }
 
+  res.setHeader("Content-Type", "text/html")
+
   var s = Date.now()
   const context = { url: req.url }
   const renderStream = renderer.renderToStream(context)
   let firstChunk = true
 
-  res.write(html.head)
+  renderStream.once('data', () => {
+    res.write(html.head)
+  })
 
   renderStream.on('data', chunk => {
-    if (firstChunk) {
-      // embed initial store state
-      if (context.initialState) {
-        res.write(
-          `<script>window.__INITIAL_STATE__=${
-            serialize(context.initialState, { isJSON: true })
-          }</script>`
-        )
-      }
-      firstChunk = false
-    }
     res.write(chunk)
   })
 
   renderStream.on('end', () => {
+    // embed initial store state
+    if (context.initialState) {
+      res.write(
+        `<script>window.__INITIAL_STATE__=${
+          serialize(context.initialState, { isJSON: true })
+        }</script>`
+      )
+    }
     res.end(html.tail)
     console.log(`whole request: ${Date.now() - s}ms`)
   })
@@ -86,7 +87,7 @@ app.get('*', (req, res) => {
   })
 })
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`)
 })
