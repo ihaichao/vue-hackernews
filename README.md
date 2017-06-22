@@ -1,4 +1,4 @@
-# vue2-hackernews
+# vue-hackernews
 
 [Live demo](https://ihaichao.github.io/vue2-hackernews/#/)
 
