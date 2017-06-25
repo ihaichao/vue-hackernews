@@ -8,7 +8,7 @@
       <router-link class="tab" :to="{ name: 'ask' }">ask</router-link>
       <router-link class="tab" :to="{ name: 'job' }">jobs</router-link>
     </ul>
-    <span class="project-info">Built with Vue.js | <a class="source" href="https://github.com/ihaichao/vue2-hackernews.git">Source</a></span>
+    <span class="project-info">Built by Zhang Zongzheng | <a class="source" href="https://github.com/ihaichao/vue-hackernews.git">Source</a></span>
 	</div>
 </template>
 
